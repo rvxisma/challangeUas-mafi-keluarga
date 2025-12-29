@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Family Tree 2-6 Node</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fdfdfd;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #d46a92; /* judul pink soft */
+    }
+
+    .tree {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    /* garis vertikal */
+    ul::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10px;
+      border-left: 2px solid #f8b6d2; /* pink soft */
+      height: 100%;
+    }
+
+    li {
+      margin: 10px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    /* garis horizontal */
+    li::before {
+      content: "";
+      position: absolute;
+      top: 12px;
+      left: 0;
+      width: 20px;
+      border-top: 2px solid #f8b6d2; /* pink soft */
+    }
+
+    .node {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 2px solid #f8b6d2; /* pink soft border */
+      border-radius: 8px;
+      background: #fff0f6; /* background pink muda */
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Visualisasi Family Tree (2-6 Node)</h1>
+
+  <div class="tree" id="treeContainer"></div>
+
+  <script>
+    
+    const familyTree = {
+      name: "Samsudin",
+      role: "Kakek Buyut",
+      children: [
+        {
+          name: "Lapnggoto",
+          role: "Kakek",
+          children: [
+            {
+              name: "Ayah: Gozali Rahman",
+              role: "Ayah",
+              children: []
+            },
+            {
+              name: "Ibu: Iim Masripah",
+              role: "Ibu",
+              children: [
+                {
+                  name: "Risma Nur Aisyatu Salma",
+                  role: "Aku",
+                  children: []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    };
+
+    // Fungsi rekursif untuk render tree
+    function renderTree(node) {
+      const li = document.createElement("li");
+
+      const box = document.createElement("span");
+      box.className = "node";
+      box.textContent = node.name + " (" + node.role + ")";
+      li.appendChild(box);
+
+      if (node.children && node.children.length > 0) {
+        const ul = document.createElement("ul");
+        node.children.forEach((child) => {
+          ul.appendChild(renderTree(child));
+        });
+        li.appendChild(ul);
+      }
+
+      return li;
+    }
+
+    // Render tree utama
+    const ulRoot = document.createElement("ul");
+    ulRoot.appendChild(renderTree(familyTree));
+    document.getElementById("treeContainer").appendChild(ulRoot);
+  </script>
+</body>
+</html>

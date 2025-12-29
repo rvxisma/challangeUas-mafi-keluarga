@@ -1,0 +1,191 @@
+/* =====================
+   GLOBAL
+===================== */
+body {
+  margin: 0;
+  font-family: "Times New Roman", Times, serif;
+  background-color: #fff1f5; /* pink sangat lembut */
+  color: #4a044e;
+}
+
+/* =====================
+   HEADER & NAV
+===================== */
+header {
+  background-color: #ec4899; /* pink utama */
+  color: #ffffff;
+  padding: 20px;
+}
+
+header h1 {
+  margin-bottom: 6px;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+nav button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 20px; /* bulat lucu */
+  cursor: pointer;
+  background-color: #f9a8d4; /* pink muda */
+  color: #4a044e;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+nav button:hover {
+  background-color: #f472b6;
+  transform: translateY(-2px);
+}
+
+nav button.active {
+  background-color: #db2777; /* pink tua */
+  color: #ffffff;
+}
+
+/* =====================
+   MAIN & SECTION
+===================== */
+main {
+  background-color: #fdf2f8; /* pink konten */
+  padding: 20px;
+  min-height: 80vh;
+}
+
+section {
+  display: none;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(236, 72, 153, 0.15);
+}
+
+section.active {
+  display: block;
+}
+
+/* =====================
+   LIST & TREE
+===================== */
+ul {
+  padding-left: 20px;
+}
+
+ul.tree {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+ul.tree li {
+  margin: 6px 0;
+}
+
+/* =====================
+   FORM
+===================== */
+form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+form input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 8px;
+  border: 1px solid #f9a8d4;
+}
+
+form button {
+  margin-top: 14px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  background-color: #ec4899;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+form button:hover {
+  background-color: #db2777;
+}
+
+/* =====================
+   NOTE / INFO BOX
+===================== */
+.note {
+  margin-top: 16px;
+  padding: 12px;
+  background-color: #fce7f3;
+  border-left: 4px solid #ec4899;
+  border-radius: 8px;
+}
+
+/* =====================
+   IMAGE & PROFILE
+===================== */
+img {
+  max-width: 100%;
+  margin-top: 12px;
+  border-radius: 8px;
+  border: 1px solid #fbcfe8;
+}
+
+.img-profil {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 140px;
+  width: 140px;
+  border-radius: 50%;
+  background-color: #fbcfe8;
+  font-size: 64px;
+  transition: transform 0.3s;
+}
+
+.img-profil:hover {
+  transform: scale(1.08);
+}
+
+/* =====================
+   TEXT UTILITIES
+===================== */
+.bold {
+  font-weight: bold;
+}
+
+.red {
+  color: #db2777;
+}
+
+/* =====================
+   FOOTER
+===================== */
+footer {
+  background-color: #fbcfe8;
+  text-align: center;
+  padding: 12px;
+  font-size: 14px;
+  color: #4a044e;
+}
+.node-img {
+  width: 40px;
+  height: 40px;
+  margin-right: 8px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+button {
+  margin-left: 10px;
+  font-size: 0.8em;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sample Family Tree (3 Node)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      font-family: 'Times New Roman', Times, serif, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .tree {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .node {
+      text-align: center;
+      padding: 10px 16px;
+      background: #ffffff;
+      border: 2px solid #f8b6d2; /* pink soft border */
+      border-radius: 6px;
+      display: inline-block;
+      min-width: 120px;
+    }
+
+    /* garis vertikal dari anak ke garis horizontal */
+    .connector {
+      width: 2px;
+      height: 20px;
+      background: #f8b6d2;
+      margin: 0 auto;
+    }
+
+    /* garis horizontal ke orang tua */
+    .line {
+      width: 100%;
+      height: 2px;
+      background: #f8b6d2;
+      margin: 10px 0;
+    }
+
+    .children {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      gap: 40px; /* jarak antar Ayah dan Ibu */
+    }
+  </style>
+</head>
+<body>
+  <h1>Visualisasi Family Tree (3 Node)</h1>
+
+  <div class="tree">
+    <div>
+      <!-- Anak -->
+      <div class="node" id="child"></div>
+      <div class="connector"></div>
+      <div class="line"></div>
+
+      <!-- Orang tua -->
+      <div class="children">
+        <div class="node" id="father"></div>
+        <div class="node" id="mother"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Data statis (Level 1)
+    const family = {
+      child: "Risma Nur Aisyatu Salma",
+      father: "Gozali Rahman",
+      mother: "Iim Masripah",
+    };
+
+    // Render ke HTML
+    document.getElementById("child").textContent = family.child;
+    document.getElementById("father").textContent = "Ayah: " + family.father;
+    document.getElementById("mother").textContent = "Ibu: " + family.mother;
+  </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Family Tree Dua Cabang Lengkap dengan Buyut</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/treant-js/1.0/Treant.css" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fdfdfd;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #d46a92;
+    }
+
+    #tree {
+      width: 100%;
+      height: 1000px;
+      margin-top: 30px;
+    }
+
+    .node {
+      border: 2px solid #f8b6d2;
+      border-radius: 8px;
+      background: #fff0f6;
+      padding: 10px 16px;
+      color: #333;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Visualisasi Family Tree Dua Cabang Lengkap</h1>
+  <div id="tree"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/treant-js/1.0/Treant.min.js"></script>
+
+  <script>
+    const chartConfig = {
+      chart: {
+        container: "#tree",
+        rootOrientation: "NORTH",
+        nodeAlign: "CENTER",
+        connectors: {
+          type: "curve",
+          style: {
+            stroke: "#f8b6d2",
+            "arrow-end": "none"
+          }
+        },
+        node: {
+          HTMLclass: "node"
+        }
+      },
+
+      nodeStructure: {
+        text: { name: "Risma Nur Aisyatu Salma", title: "Aku" },
+        children: [
+          // Cabang Ayah
+          {
+            text: { name: "Ayah: Gozali Rahman" },
+            children: [
+              {
+                text: { name: "Kakek dari Ayah" },
+                children: [
+                  { text: { name: "Buyut Kakek (Ayah)" } }
+                ]
+              },
+              {
+                text: { name: "Nenek dari Ayah" },
+                children: [
+                  { text: { name: "Buyut Nenek (Ayah)" } }
+                ]
+              }
+            ]
+          },
+          // Cabang Mama
+          {
+            text: { name: "Mama: Iim Masripah" },
+            children: [
+              {
+                text: { name: "Kakek dari Mama" },
+                children: [
+                  { text: { name: "Buyut Kakek (Mama)" } }
+                ]
+              },
+              {
+                text: { name: "Nenek dari Mama" },
+                children: [
+                  { text: { name: "Buyut Nenek (Mama)" } }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    };
+
+    new Treant(chartConfig);
+  </script>
+</body>
+</html>
