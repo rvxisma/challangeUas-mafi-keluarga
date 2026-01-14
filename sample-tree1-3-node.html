@@ -32,7 +32,7 @@
       min-width: 120px;
     }
 
-    /* garis vertikal dari anak ke garis horizontal */
+    /* garis vertikal */
     .connector {
       width: 2px;
       height: 20px;
@@ -40,7 +40,7 @@
       margin: 0 auto;
     }
 
-    /* garis horizontal ke orang tua */
+    /* garis horizontal */
     .line {
       width: 100%;
       height: 2px;
@@ -48,11 +48,16 @@
       margin: 10px 0;
     }
 
-    .children {
+    .parents {
+      display: flex;
+      justify-content: center;
+      gap: 40px; /* jarak antar Ayah dan Ibu */
+    }
+
+    .child {
       display: flex;
       justify-content: center;
       margin-top: 20px;
-      gap: 40px; /* jarak antar Ayah dan Ibu */
     }
   </style>
 </head>
@@ -61,15 +66,19 @@
 
   <div class="tree">
     <div>
-      <!-- Anak -->
-      <div class="node" id="child"></div>
-      <div class="connector"></div>
-      <div class="line"></div>
-
       <!-- Orang tua -->
-      <div class="children">
+      <div class="parents">
         <div class="node" id="father"></div>
         <div class="node" id="mother"></div>
+      </div>
+
+      <!-- Garis penghubung -->
+      <div class="line"></div>
+      <div class="connector"></div>
+
+      <!-- Anak -->
+      <div class="child">
+        <div class="node" id="child"></div>
       </div>
     </div>
   </div>
