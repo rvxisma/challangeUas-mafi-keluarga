@@ -1,24 +1,14 @@
-/* =====================
-   GLOBAL
-===================== */
 body {
   margin: 0;
   font-family: "Times New Roman", Times, serif;
-  background-color: #fff1f5; /* pink sangat lembut */
+  background-color: #fff1f5;
   color: #4a044e;
 }
 
-/* =====================
-   HEADER & NAV
-===================== */
 header {
-  background-color: #ec4899; /* pink utama */
+  background-color: #ec4899;
   color: #ffffff;
   padding: 20px;
-}
-
-header h1 {
-  margin-bottom: 6px;
 }
 
 nav {
@@ -31,9 +21,9 @@ nav {
 nav button {
   padding: 8px 14px;
   border: none;
-  border-radius: 20px; /* bulat lucu */
+  border-radius: 20px;
   cursor: pointer;
-  background-color: #f9a8d4; /* pink muda */
+  background-color: #f9a8d4;
   color: #4a044e;
   font-size: 14px;
   transition: all 0.3s ease;
@@ -45,15 +35,12 @@ nav button:hover {
 }
 
 nav button.active {
-  background-color: #db2777; /* pink tua */
+  background-color: #db2777;
   color: #ffffff;
 }
 
-/* =====================
-   MAIN & SECTION
-===================== */
 main {
-  background-color: #fdf2f8; /* pink konten */
+  background-color: #fdf2f8;
   padding: 20px;
   min-height: 80vh;
 }
@@ -70,25 +57,6 @@ section.active {
   display: block;
 }
 
-/* =====================
-   LIST & TREE
-===================== */
-ul {
-  padding-left: 20px;
-}
-
-ul.tree {
-  list-style-type: none;
-  padding-left: 20px;
-}
-
-ul.tree li {
-  margin: 6px 0;
-}
-
-/* =====================
-   FORM
-===================== */
 form label {
   display: block;
   margin-top: 10px;
@@ -113,32 +81,18 @@ form button {
   color: #ffffff;
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.3s;
 }
 
 form button:hover {
   background-color: #db2777;
 }
 
-/* =====================
-   NOTE / INFO BOX
-===================== */
 .note {
   margin-top: 16px;
   padding: 12px;
   background-color: #fce7f3;
   border-left: 4px solid #ec4899;
   border-radius: 8px;
-}
-
-/* =====================
-   IMAGE & PROFILE
-===================== */
-img {
-  max-width: 100%;
-  margin-top: 12px;
-  border-radius: 8px;
-  border: 1px solid #fbcfe8;
 }
 
 .img-profil {
@@ -150,27 +104,8 @@ img {
   border-radius: 50%;
   background-color: #fbcfe8;
   font-size: 64px;
-  transition: transform 0.3s;
 }
 
-.img-profil:hover {
-  transform: scale(1.08);
-}
-
-/* =====================
-   TEXT UTILITIES
-===================== */
-.bold {
-  font-weight: bold;
-}
-
-.red {
-  color: #db2777;
-}
-
-/* =====================
-   FOOTER
-===================== */
 footer {
   background-color: #fbcfe8;
   text-align: center;
@@ -178,14 +113,11 @@ footer {
   font-size: 14px;
   color: #4a044e;
 }
+
 .node-img {
   width: 40px;
   height: 40px;
   margin-right: 8px;
   border-radius: 50%;
   vertical-align: middle;
-}
-button {
-  margin-left: 10px;
-  font-size: 0.8em;
 }
