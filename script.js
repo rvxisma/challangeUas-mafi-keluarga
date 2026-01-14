@@ -1,91 +1,53 @@
+// Data awal family tree
 let treeData = JSON.parse(localStorage.getItem("familyTree")) || {
   id: "root",
-  name: "Risma",
-  image: "images/risma.jpg", 
+  role: "Anak",
+  name: "Risma Nur Aisyatu Salma",
+  image: "images/risma.jpg",
   children: [
     {
       id: "ayah",
-      name: "Ayah: Gozali Rahman",
+      role: "Ayah",
+      name: "Gozali Rahman",
       image: "images/ayah.jpg",
-      children: [
-        {
-          id: "kakekAyah",
-          name: "Kakek (Ayah): Lapnggoto",
-          image: "images/kakek.jpg",
-          children: [
-            {
-              id: "buyutAyah",
-              name: "Buyut (Ayah): Samsudin",
-              image: "images/buyut.jpg",
-              children: []
-            }
-          ]
-        },
-        {
-          id: "nenekAyah",
-          name: "Nenek (Ayah): Wati",
-          image: "images/nenek.jpg",
-          children: []
-        }
-      ]
+      children: []
     },
     {
       id: "ibu",
-      name: "Ibu: Iim Masripah",
+      role: "Ibu",
+      name: "Iim Masripah",
       image: "images/ibu.jpg",
-      children: [
-        {
-          id: "kakekIbu",
-          name: "Kakek (Ibu): Encu Samsudin",
-          image: "images/kakek.jpg",
-          children: []
-        },
-        {
-          id: "nenekIbu",
-          name: "Nenek (Ibu): Kuraisin",
-          image: "images/nenek.jpg",
-          children: []
-        }
-      ]
+      children: []
     }
   ]
 };
 
+// Simpan tree ke localStorage
 function saveTree() {
   localStorage.setItem("familyTree", JSON.stringify(treeData));
 }
 
-function showPage(id) {
-  document.querySelectorAll("main section").forEach(s => s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-
-  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
-  document.querySelector(`nav button[onclick="showPage('${id}')"]`).classList.add("active");
-}
-
+// Render tree ke layar
 function renderTree(node, container) {
   container.innerHTML = "";
   const ul = document.createElement("ul");
   ul.className = "tree";
   container.appendChild(ul);
 
-  function draw(n, parent, level) {
+  function draw(n, parent) {
     const li = document.createElement("li");
 
-    // gambar node
     const img = document.createElement("img");
     img.src = n.image || "images/no-profile.jpg";
-    img.alt = n.name;
     img.className = "node-img";
 
-    // teks nama
     const span = document.createElement("span");
-    span.textContent = n.name;
+    span.textContent = n.role ? `${n.role}: ${n.name}` : n.name;
 
-    // tombol hapus
     const delBtn = document.createElement("button");
     delBtn.textContent = "Hapus";
     delBtn.onclick = () => {
+      if (n.id === "root") return alert("Root tidak bisa dihapus");
       deleteNode(treeData, n.id);
       saveTree();
       renderTree(treeData, container);
@@ -94,40 +56,62 @@ function renderTree(node, container) {
     li.appendChild(img);
     li.appendChild(span);
     li.appendChild(delBtn);
-
-    if (level === 0) li.className = "root-node";
-    else if (n.children.length) li.className = "parent-node";
-    else li.className = "leaf-node";
-
     parent.appendChild(li);
 
     if (n.children.length) {
       const childUl = document.createElement("ul");
-      childUl.className = "tree";
       li.appendChild(childUl);
-      n.children.forEach(c => draw(c, childUl, level + 1));
+      n.children.forEach(c => draw(c, childUl));
     }
   }
 
-  draw(node, ul, 0);
+  draw(node, ul);
+
   document.getElementById("info").textContent =
     `Total Node: ${countNodes(node)} | Kedalaman: ${getDepth(node)}`;
 }
 
+// Fungsi hapus node
 function deleteNode(node, id) {
-  node.children = node.children.filter(c => c.id !== id);
-  node.children.forEach(c => deleteNode(c, id));
+  for (let i = 0; i < node.children.length; i++) {
+    if (node.children[i].id === id) {
+      node.children.splice(i, 1);
+      return true;
+    } else {
+      if (deleteNode(node.children[i], id)) return true;
+    }
+  }
+  return false;
 }
 
-function findNode(node, name) {
-  if (node.name === name) return node;
+// Cari node berdasarkan ID
+function findNodeById(node, id) {
+  if (node.id === id) return node;
   for (let c of node.children) {
-    const found = findNode(c, name);
+    const found = findNodeById(c, id);
     if (found) return found;
   }
   return null;
 }
 
+// Hitung jumlah node
+function countNodes(node) {
+  return 1 + node.children.reduce((a, c) => a + countNodes(c), 0);
+}
+
+// Hitung kedalaman tree
+function getDepth(node) {
+  if (!node.children.length) return 1;
+  return 1 + Math.max(...node.children.map(getDepth));
+}
+
+// Reset tree ke awal
+function resetTree() {
+  localStorage.removeItem("familyTree");
+  location.reload();
+}
+
+// Event listener saat halaman selesai load
 document.addEventListener("DOMContentLoaded", () => {
   const treeDiv = document.getElementById("tree");
   renderTree(treeData, treeDiv);
@@ -135,30 +119,31 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("familyForm").addEventListener("submit", e => {
     e.preventDefault();
 
-    const name = document.getElementById("name").value.trim();
     const role = document.getElementById("role").value.trim();
-    const parent = document.getElementById("parent").value.trim();
+    const name = document.getElementById("name").value.trim();
+    const parentId = document.getElementById("parent").value.trim();
     const file = document.getElementById("image").files[0];
 
-    if (!file) return alert("Wajib upload gambar!");
-    if (file.type !== "image/jpeg") return alert("Harus file JPG!");
-    if (file.size > 100 * 1024) return alert("Ukuran maksimal 100KB!");
+    if (!file) return alert("Upload gambar wajib");
+    if (!file.type.includes("jpeg")) return alert("File harus JPG");
+    if (file.size > 100 * 1024) return alert("Max 100KB");
 
     const reader = new FileReader();
-    reader.onload = function(evt) {
-      const node = {
+    reader.onload = ev => {
+      const newNode = {
         id: Date.now().toString(),
-        name: `${role}: ${name}`,
-        image: evt.target.result, // simpan base64
+        role,
+        name,
+        image: ev.target.result,
         children: []
       };
 
-      if (parent) {
-        const p = findNode(treeData, parent);
-        if (!p) return alert("Parent tidak ditemukan");
-        p.children.push(node);
+      if (parentId) {
+        const parent = findNodeById(treeData, parentId);
+        if (!parent) return alert("Parent tidak ditemukan");
+        parent.children.push(newNode);
       } else {
-        treeData.children.push(node);
+        treeData.children.push(newNode);
       }
 
       saveTree();
@@ -169,15 +154,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-function countNodes(node) {
-  return 1 + node.children.reduce((a, c) => a + countNodes(c), 0);
-}
+// Fungsi untuk navigasi antar section
+function showPage(id) {
+  document.querySelectorAll("main section").forEach(sec => {
+    sec.classList.remove("active");
+  });
+  document.getElementById(id).classList.add("active");
 
-function getDepth(node) {
-  if (!node.children.length) return 1;
-  return 1 + Math.max(...node.children.map(getDepth));
-}
-function resetTree() {
-  localStorage.removeItem("familyTree"); // hapus data tersimpan
-  location.reload(); // reload halaman agar tree kembali ke default
+  document.querySelectorAll("nav button").forEach(btn => {
+    btn.classList.remove("active");
+  });
+  document.querySelector(`nav button[onclick="showPage('${id}')"]`).classList.add("active");
 }
